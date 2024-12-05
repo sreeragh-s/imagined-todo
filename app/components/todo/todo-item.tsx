@@ -4,7 +4,6 @@ import { useState } from "react";
 import { Todo } from "@/app/lib/zustand-store/todo-store";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Trash2, Pencil } from "lucide-react";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Calendar } from "@/components/ui/calendar";
@@ -12,6 +11,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { format } from "date-fns";
 import { CalendarIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { ResponsiveModal, ResponsiveModalContent, ResponsiveModalHeader, ResponsiveModalTitle } from "@/components/ui/responsice-modal";
 
 interface TodoItemProps {
   todo: Todo;
@@ -65,11 +65,11 @@ export function TodoItem({ todo, onToggle, onRemove, onEdit }: TodoItemProps) {
         </div>
       </div>
 
-      <Dialog open={isEditing} onOpenChange={setIsEditing}>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>Edit Todo</DialogTitle>
-          </DialogHeader>
+      <ResponsiveModal   open={isEditing} onOpenChange={setIsEditing}>
+        <ResponsiveModalContent>
+          <ResponsiveModalHeader>
+            <ResponsiveModalTitle className="text-sm font-semibold pb-2">Edit Todo</ResponsiveModalTitle>
+          </ResponsiveModalHeader>
           <form onSubmit={handleSubmit} className="space-y-4">
             <Input
               placeholder="What needs to be done?"
@@ -117,8 +117,8 @@ export function TodoItem({ todo, onToggle, onRemove, onEdit }: TodoItemProps) {
               <Button type="submit">Save</Button>
             </div>
           </form>
-        </DialogContent>
-      </Dialog>
+        </ResponsiveModalContent>
+      </ResponsiveModal>
     </>
   );
 }
